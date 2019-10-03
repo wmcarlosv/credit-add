@@ -16,7 +16,7 @@
 			  <span class="info-box-icon bg-red"><i class="fas fa-user-tie"></i></span>
 			  <div class="info-box-content">
 			    <span class="info-box-text">Vendedores</span>
-			    <span class="info-box-number">0</span>
+			    <span class="info-box-number">{{ $sellers->count() }}</span>
 			  </div>
 			</div>
     	</div>
@@ -25,7 +25,7 @@
 			  <span class="info-box-icon bg-blue"><i class="fas fa-users-cog"></i></span>
 			  <div class="info-box-content">
 			    <span class="info-box-text">Puntos de Ventas</span>
-			    <span class="info-box-number">0</span>
+			    <span class="info-box-number">{{ $sales_point->count() }}</span>
 			  </div>
 			</div>
     	</div>
@@ -46,8 +46,44 @@
 		    				<th>Con Variacion</th>
 		    				<th>Tipo Variacion</th>
 		    				<th>Monto Variacion</th>
+		    				<th></th>
 		    			</thead>
-		    			<tbody></tbody>
+		    			<tbody>
+		    				@foreach($sales as $d)
+		    					<tr>
+									<td>{{ $d->id }}</td>
+									<td>{{ $d->userf->name.' '.$d->userf->last_name }} ({{ $d->userf->role }})</td>
+									<td>{{ $d->usert->name.' '.$d->usert->last_name }} ({{ $d->usert->role }})</td>
+									<td>{{ $d->credits }}</td>
+									<td>
+										@if($d->is_variation)
+											Si
+										@else
+											No
+										@endif
+									</td>
+									<td>
+										@if(!empty($d->variation_type))
+											@if($d->variation_type == 'increment')
+												Incremento
+											@else
+												Descuento
+											@endif
+										@else
+											-
+										@endif
+									</td>
+									<td>
+										@if(!empty($d->variation))
+											{{ $d->variation }}%
+										@else
+											-
+										@endif
+									</td>
+									<td></td>
+								</tr>
+		    				@endforeach
+		    			</tbody>
 		    		</table>
 	    		</div>
 	    	</div>
@@ -62,7 +98,7 @@
 			  <span class="info-box-icon bg-red"><i class="fas fa-credit-card"></i></span>
 			  <div class="info-box-content">
 			    <span class="info-box-text">Creditos Disponibles</span>
-			    <span class="info-box-number">0</span>
+			    <span class="info-box-number">{{ Auth::user()->total_credit }}</span>
 			  </div>
 			</div>
     	</div>
@@ -71,7 +107,7 @@
 			  <span class="info-box-icon bg-blue"><i class="fas fa-users-cog"></i></span>
 			  <div class="info-box-content">
 			    <span class="info-box-text">Puntos de Ventas</span>
-			    <span class="info-box-number">0</span>
+			    <span class="info-box-number">{{ $sales_point_by_seller->count() }}</span>
 			  </div>
 			</div>
     	</div>
@@ -93,7 +129,42 @@
 		    				<th>Tipo Variacion</th>
 		    				<th>Monto Variacion</th>
 		    			</thead>
-		    			<tbody></tbody>
+		    			<tbody>
+			    		@foreach($sales_by_seller as $d)
+							<tr>
+								<td>{{ $d->id }}</td>
+								<td>{{ $d->userf->name.' '.$d->userf->last_name }} ({{ $d->userf->role }})</td>
+								<td>{{ $d->usert->name.' '.$d->usert->last_name }} ({{ $d->usert->role }})</td>
+								<td>{{ $d->credits }}</td>
+								<td>
+									@if($d->is_variation)
+										Si
+									@else
+										No
+									@endif
+								</td>
+								<td>
+									@if(!empty($d->variation_type))
+										@if($d->variation_type == 'increment')
+											Incremento
+										@else
+											Descuento
+										@endif
+									@else
+										-
+									@endif
+								</td>
+								<td>
+									@if(!empty($d->variation))
+										{{ $d->variation }}%
+									@else
+										-
+									@endif
+								</td>
+								<td></td>
+							</tr>
+						@endforeach
+		    			</tbody>
 		    		</table>
 	    		</div>
 	    	</div>
@@ -108,7 +179,7 @@
 			  <span class="info-box-icon bg-red"><i class="fas fa-credit-card"></i></span>
 			  <div class="info-box-content">
 			    <span class="info-box-text">Creditos Disponibles</span>
-			    <span class="info-box-number">{{ $provider_c->sum('credit') }}</span>
+			    <span class="info-box-number">{{ $provider_c->credit }}</span>
 			  </div>
 			</div>
     	</div>
