@@ -27,7 +27,7 @@
 					<select id="provider" name="provider" class="form-control basic-select">
 						<option></option>
 						@foreach($providers as $p)
-							<option value="{{ $p->mobile }}">{{ $p->first_name.' '.$p->last_name.' '.$p->email.' '.$p->mobile }}</option>
+							<option value="{{ $p->mobile }}">{{ $p->first_name.' '.$p->last_name.' '.$p->email.' '.$p->mobile }} (Balance => {{ $p->wallet_balance }})</option>
 						@endforeach
 					</select>
 				</div>

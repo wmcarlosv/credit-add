@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'America/Argentina/Jujuy',
+    'timezone' => 'America/Araguaina',
 
     /*
     |--------------------------------------------------------------------------
