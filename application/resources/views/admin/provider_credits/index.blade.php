@@ -18,6 +18,7 @@
 					<th>ID</th>
 					<th>Conductor</th>
 					<th>Credito</th>
+					<th>Fecha/Hora Operación</th>
 					<th></th>
 				</thead>
 				<tbody>
@@ -26,6 +27,7 @@
 							<td>{{ $d->id }}</td>
 							<td>{{ $d->provider }}</td>
 							<td>{{ $d->credit }}</td>
+							<td>{{ date('d-m-Y H:m:s',strtotime($d->created_at)) }}</td>
 							<td></td>
 						</tr>
 					@endforeach

@@ -46,6 +46,7 @@
 		    				<th>Con Variacion</th>
 		    				<th>Tipo Variacion</th>
 		    				<th>Monto Variacion</th>
+		    				<th>Fecha/Hora Operación</th>
 		    				<th></th>
 		    			</thead>
 		    			<tbody>
@@ -80,6 +81,7 @@
 											-
 										@endif
 									</td>
+									<td>{{ date('d-m-Y H:m:s',strtotime($d->created_at)) }}</td>
 									<td></td>
 								</tr>
 		    				@endforeach
@@ -128,6 +130,7 @@
 		    				<th>Con Variacion</th>
 		    				<th>Tipo Variacion</th>
 		    				<th>Monto Variacion</th>
+		    				<th>Fecha/Hora Operación</th>
 		    			</thead>
 		    			<tbody>
 			    		@foreach($sales_by_seller as $d)
@@ -161,6 +164,7 @@
 										-
 									@endif
 								</td>
+								<td>{{ date('d-m-Y H:m:s',strtotime($d->created_at)) }}</td>
 								<td></td>
 							</tr>
 						@endforeach

@@ -22,6 +22,7 @@
 					<th>Con Variacion</th>
 					<th>Tipo de Variacion</th>
 					<th>Variacion</th>
+					<th>Fecha/Hora Operación</th>
 					<th></th>
 				</thead>
 				<tbody>
@@ -56,6 +57,7 @@
 									-
 								@endif
 							</td>
+							<td>{{ date('d-m-Y H:m:s',strtotime($d->created_at)) }}</td>
 							<td></td>
 						</tr>
 					@endforeach
