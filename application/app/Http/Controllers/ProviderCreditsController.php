@@ -33,7 +33,8 @@ class ProviderCreditsController extends Controller
     {
         $title = "Nuevo Credito a Conductor";
         $method = "insert";
-        return view($this->view."save",['title' => $title, 'method' => $method]);
+        $providers  = json_decode(file_get_contents("http://app.safeeasytravel.com/api/provider/external_get_providers"));
+        return view($this->view."save",['title' => $title, 'method' => $method, 'providers' => $providers]);
     }
 
     /**
@@ -62,7 +63,8 @@ class ProviderCreditsController extends Controller
         $object->credit = $request->input('credit');
 
         if($object->save()){
-            $this->del_credit($object->credits);
+            $this->del_credit($object->credit);
+            $this->add_credit($object->provider, $object->credit);
             flash()->overlay('Datos Registrados con Exito!!','Exito');
         }else{
             flash()->overlay('Error al tratar de insertar los Datos!!', 'Exito');
@@ -78,6 +80,11 @@ class ProviderCreditsController extends Controller
         $user->total_credit = $new_credit;
         $user->save();
     }
+
+    public function add_credit($phone, $credit){
+        $add_credit  = json_decode(file_get_contents("http://app.safeeasytravel.com/api/provider/external_add_credit/".$phone."/".$credit));
+        return $add_credit;
+    }  
 
     public function validate_credit($credit){
         $user = User::findorfail(Auth::user()->id);

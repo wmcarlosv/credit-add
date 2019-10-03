@@ -179,7 +179,7 @@
 			  <span class="info-box-icon bg-red"><i class="fas fa-credit-card"></i></span>
 			  <div class="info-box-content">
 			    <span class="info-box-text">Creditos Disponibles</span>
-			    <span class="info-box-number">{{ $provider_c->credit }}</span>
+			    <span class="info-box-number">{{ Auth::user()->total_credit }}</span>
 			  </div>
 			</div>
     	</div>

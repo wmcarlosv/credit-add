@@ -2,6 +2,10 @@
 
 @section('title', $title)
 
+@section('css')
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+@stop
+
 @section('content')
 	@if($errors->any())
 		<div class="alert alert-danger">
@@ -20,7 +24,12 @@
 			{!! Form::open(['route' => 'provider-credits.store', 'method' => 'POST', 'autocomplete' => 'off', 'files' => true]) !!}
 				<div class="form-group">
 					<label for="provider">Conductor</label>
-					<input type="text" id="provider" name="provider" value="{{ @$data->provider }}"  class="form-control" />
+					<select id="provider" name="provider" class="form-control basic-select">
+						<option></option>
+						@foreach($providers as $p)
+							<option value="{{ $p->mobile }}">{{ $p->first_name.' '.$p->last_name.' '.$p->email.' '.$p->mobile }}</option>
+						@endforeach
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="credit">Credito</label>
@@ -31,4 +40,13 @@
 			{!! Form::close() !!}
 		</div>
 	</div>
+@stop
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('select.basic-select').select2();
+	});
+</script>
 @stop
