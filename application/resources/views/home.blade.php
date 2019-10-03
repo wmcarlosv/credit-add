@@ -200,6 +200,7 @@
 		    				<th>ID</th>
 		    				<th>Conductor</th>
 		    				<th>Credito</th>
+		    				<th>Fecha/Hora Operación</th>
 		    			</thead>
 		    			<tbody>
 		    				@foreach($provider_c as $pc)
@@ -207,6 +208,7 @@
 		    					<td>{{ $pc->id }}</td>
 		    					<td>{{ $pc->provider }}</td>
 		    					<td>{{ $pc->credit }}</td>
+		    					<td>{{ date('d-m-Y H:m:s',strtotime($pc->created_at)) }}</td>
 		    				</tr>
 		    				@endforeach
 		    			</tbody>
